@@ -143,7 +143,9 @@ export default function SmartHelp() {
     const [messages, setMessages] = useState(() => [makeWelcomeMsg(languageMode === 'bilingual' ? 'hi' : 'en')])
     const [input, setInput] = useState('')
     const [typing, setTyping] = useState(false)
+    const [listening, setListening] = useState(false)
     const bottomRef = useRef(null)
+    const recognition = useRef(null)
 
     // Listen for mode changes — 'storage' fires cross-tab, 'languageModeChanged' fires same-tab
     useEffect(() => {
@@ -163,6 +165,28 @@ export default function SmartHelp() {
     useEffect(() => {
         const lang = languageMode === 'bilingual' ? 'hi' : 'en'
         setMessages([makeWelcomeMsg(lang)])
+
+        // Setup Speech Recognition
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+        if (SpeechRecognition) {
+            recognition.current = new SpeechRecognition()
+            recognition.current.continuous = false
+            recognition.current.interimResults = false
+            recognition.current.lang = languageMode === 'bilingual' ? 'hi-IN' : 'en-US'
+
+            recognition.current.onresult = (event) => {
+                const transcript = event.results[0][0].transcript
+                setInput(prev => (prev ? `${prev} ${transcript}` : transcript))
+                setListening(false)
+            }
+
+            recognition.current.onend = () => setListening(false)
+            recognition.current.onerror = () => setListening(false)
+        }
+
+        return () => {
+            if (recognition.current) recognition.current.abort()
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [languageMode])
 
@@ -220,6 +244,20 @@ export default function SmartHelp() {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault()
             sendMessage()
+        }
+    }
+
+    const toggleListening = () => {
+        if (!recognition.current) {
+            alert("Speech recognition not supported in this browser.")
+            return
+        }
+        if (listening) {
+            recognition.current.stop()
+        } else {
+            recognition.current.lang = languageMode === 'bilingual' ? 'hi-IN' : 'en-US'
+            recognition.current.start()
+            setListening(true)
         }
     }
 
@@ -306,6 +344,20 @@ export default function SmartHelp() {
                     rows={1}
                     className="flex-1 resize-none outline-none text-sm text-gray-800 placeholder-gray-400 max-h-28 leading-relaxed bg-transparent"
                 />
+
+                {/* 🎤 Mic Button */}
+                <button
+                    onClick={toggleListening}
+                    className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 shadow-sm flex-shrink-0 ${listening
+                            ? 'bg-red-500 text-white animate-pulse shadow-red-200 ring-4 ring-red-100'
+                            : 'bg-gray-50 text-gray-500 hover:bg-gray-100'
+                        }`}
+                    title={listening ? "Listening..." : "Voice Input"}
+                >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                    </svg>
+                </button>
                 <button
                     onClick={() => sendMessage()}
                     disabled={!input.trim() || typing}
