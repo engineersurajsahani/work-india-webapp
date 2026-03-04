@@ -17,12 +17,43 @@ function MessageBubble({ msg }) {
 }
 
 const ONBOARDING_STEPS = [
-    { key: 'fullName', question: "Hi! I'm your Career Assistant AI 🤖\n\nLet's build your profile. What's your full name?", placeholder: 'Full name' },
-    { key: 'title', question: 'What is your professional title or the type of work you do?', placeholder: 'e.g. Electrician, Plumber, Data Entry' },
-    { key: 'salaryType', question: 'Do you prefer a monthly salary or hourly pay?', kind: 'salaryType' },
-    { key: 'expectedSalary', question: 'What is your expected salary?', placeholder: 'e.g. ₹25,000/month or ₹150/hour', kind: 'salary' },
-    { key: 'currentLocation', question: 'Which city are you currently based in?', placeholder: 'e.g. Mumbai' },
-    { key: 'preferredLocation', question: 'Which city/area do you prefer to work in?', placeholder: 'e.g. Pune, Navi Mumbai' },
+    {
+        key: 'fullName',
+        en: "Hi! I'm your Career Assistant AI 🤖\n\nLet's build your profile. What's your full name?",
+        hi: "नमस्ते! मैं आपका करियर असिस्टेंट AI हूँ 🤖\nचलिए आपकी प्रोफ़ाइल बनाते हैं। आपका पूरा नाम क्या है?",
+        placeholder: 'Full name'
+    },
+    {
+        key: 'title',
+        en: 'What is your professional title or the type of work you do?',
+        hi: 'आपका प्रोफेशनल टाइटल या आपके काम का प्रकार क्या है?',
+        placeholder: 'e.g. Electrician, Plumber, Data Entry'
+    },
+    {
+        key: 'salaryType',
+        en: 'Do you prefer a monthly salary or hourly pay?',
+        hi: 'क्या आप मासिक वेतन या प्रति घंटा वेतन पसंद करते हैं?',
+        kind: 'salaryType'
+    },
+    {
+        key: 'expectedSalary',
+        en: 'What is your expected salary?',
+        hi: 'आपका अपेक्षित वेतन क्या है?',
+        placeholder: 'e.g. ₹25,000/month or ₹150/hour',
+        kind: 'salary'
+    },
+    {
+        key: 'currentLocation',
+        en: 'Which city are you currently based in?',
+        hi: 'आप अभी किस शहर में रह रहे हैं?',
+        placeholder: 'e.g. Mumbai'
+    },
+    {
+        key: 'preferredLocation',
+        en: 'Which city/area do you prefer to work in?',
+        hi: 'आप किस शहर/क्षेत्र में काम करना पसंद करते हैं?',
+        placeholder: 'e.g. Pune, Navi Mumbai'
+    },
 ]
 
 // ─── UTILS & BILINGUAL LAYER ───────────────────────────────────────────────────
@@ -44,43 +75,6 @@ function formatBilingualSeeker(englishText) {
         if (englishText.includes(frag)) return `${hi}\n\n${englishText}`
     }
     return englishText
-}
-
-function extractProfileOneShot(text) {
-    const textLower = text.toLowerCase()
-
-    let fullName = 'User'
-    let title = 'Professional'
-    let expectedSalary = 'Negotiable'
-    let location = 'India'
-
-    // Name
-    const nameMatch = text.match(/(?:nam|name is|naam|naam hai|i am|am|mera naam|my name is)\s+([A-Za-z]+)/i)
-    if (nameMatch) fullName = nameMatch[1]
-
-    // Job Title
-    const knownJobs = ['plumber', 'electrician', 'driver', 'carpenter', 'painter', 'cleaner', 'data entry', 'maid']
-    for (const job of knownJobs) {
-        if (textLower.includes(job)) {
-            title = job.charAt(0).toUpperCase() + job.slice(1)
-            break
-        }
-    }
-
-    // Salary
-    const salaryMatch = text.match(/([\d,]{2,10}(?:\s*(?:k|thousand|000))?)/i)
-    if (salaryMatch) expectedSalary = `₹${salaryMatch[0].replace(/k/i, '000')}`
-
-    // Location
-    const knownCities = ['mumbai', 'pune', 'delhi', 'bangalore', 'chennai', 'hyderabad', 'kolkata']
-    for (const city of knownCities) {
-        if (textLower.includes(city)) {
-            location = city.charAt(0).toUpperCase() + city.slice(1)
-            break
-        }
-    }
-
-    return { fullName, title, salaryType: 'monthly', expectedSalary, currentLocation: location, preferredLocation: location }
 }
 
 // Simple AI response engine for post-onboarding queries
@@ -159,12 +153,12 @@ export default function SeekerOnboardingChat({ onProfileReady }) {
             onProfileReady?.(profile, false)
         } else {
             // Uncompleted onboarding start
-            if (languageMode === 'bilingual') {
-                setMessages([{ id: 1, role: 'bot', text: "नमस्ते! कृपया एक ही संदेश में अपना नाम, काम, अपेक्षित वेतन और शहर बताएं।\n\nHi! I'm your Career Assistant AI 🤖\nPlease tell me your name, profession, expected salary, and city in ONE single message. (e.g. 'I am Amit, Plumber, expecting 25k in Mumbai')" }])
-            } else {
-                setMessages([{ id: 1, role: 'bot', text: steps[0].question }])
-            }
-            setCurrentIdx(0) // reset progress if user toggled mid-way
+            const firstStep = steps[0]
+            const welcomeText = languageMode === 'bilingual'
+                ? `${firstStep.hi}\n\n${firstStep.en}`
+                : firstStep.en
+            setMessages([{ id: 1, role: 'bot', text: welcomeText }])
+            setCurrentIdx(0)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [languageMode])
@@ -223,7 +217,11 @@ export default function SeekerOnboardingChat({ onProfileReady }) {
         }
 
         setCurrentIdx(nextIdx)
-        botReply(steps[nextIdx].question)
+        const nextStep = steps[nextIdx]
+        const nextQuest = languageMode === 'bilingual'
+            ? `${nextStep.hi}\n\n${nextStep.en}`
+            : nextStep.en
+        botReply(nextQuest)
     }
 
     const handleFreeChat = (userText) => {
@@ -253,14 +251,7 @@ export default function SeekerOnboardingChat({ onProfileReady }) {
         if (completed) {
             handleFreeChat(text)
         } else {
-            if (languageMode === 'bilingual') {
-                setMessages(prev => [...prev, { id: Date.now(), role: 'user', text }])
-                const extractedProfile = extractProfileOneShot(text)
-                setAnswers(extractedProfile)
-                await finish(extractedProfile)
-            } else {
-                await advanceOnboarding(text)
-            }
+            await advanceOnboarding(text)
         }
     }
 
@@ -268,14 +259,20 @@ export default function SeekerOnboardingChat({ onProfileReady }) {
         setCompleted(false)
         setCurrentIdx(0)
         setAnswers({ fullName: '', title: '', salaryType: 'monthly', expectedSalary: '', currentLocation: '', preferredLocation: '' })
-        if (languageMode === 'bilingual') {
-            setMessages([{ id: Date.now(), role: 'bot', text: "ज़रूर! चलिए आपकी प्रोफ़ाइल अपडेट करते हैं। 📝\nकृपया एक ही संदेश में अपना नाम, काम, अपेक्षित वेतन और शहर बताएं।\n\nSure! Let's update your profile. 📝\nPlease tell me your name, profession, expected salary, and city in ONE single message." }])
-        } else {
-            setMessages([{ id: Date.now(), role: 'bot', text: "Sure! Let's update your profile. 📝\n\n" + steps[0].question }])
-        }
+
+        const firstStep = steps[0]
+        const prefix = languageMode === 'bilingual'
+            ? "ज़रूर! चलिए आपकी प्रोफ़ाइल अपडेट करते हैं। 📝"
+            : "Sure! Let's update your profile. 📝"
+
+        const quest = languageMode === 'bilingual'
+            ? `${firstStep.hi}\n\n${firstStep.en}`
+            : firstStep.en
+
+        setMessages([{ id: Date.now(), role: 'bot', text: `${prefix}\n\n${quest}` }])
     }
 
-    const showSalaryButtons = !completed && languageMode === 'english' && steps[currentIdx]?.kind === 'salaryType'
+    const showSalaryButtons = !completed && steps[currentIdx]?.kind === 'salaryType'
     const inputDisabled = saving || isTyping || (!completed && showSalaryButtons)
 
     return (
@@ -332,7 +329,9 @@ export default function SeekerOnboardingChat({ onProfileReady }) {
                     {/* Input area */}
                     {showSalaryButtons ? (
                         <div className="p-4 bg-white border-t border-gray-100">
-                            <p className="text-xs text-gray-400 mb-2 font-medium">Choose your preferred pay type:</p>
+                            <p className="text-xs text-gray-400 mb-2 font-medium">
+                                {languageMode === 'bilingual' ? 'अपना पसंदीदा वेतन प्रकार चुनें:' : 'Choose your preferred pay type:'}
+                            </p>
                             <div className="flex gap-2">
                                 <button
                                     type="button"
@@ -340,7 +339,7 @@ export default function SeekerOnboardingChat({ onProfileReady }) {
                                     disabled={saving}
                                     className="flex-1 btn-secondary py-2"
                                 >
-                                    📅 Monthly
+                                    {languageMode === 'bilingual' ? '📅 मासिक / Monthly' : '📅 Monthly'}
                                 </button>
                                 <button
                                     type="button"
@@ -348,7 +347,7 @@ export default function SeekerOnboardingChat({ onProfileReady }) {
                                     disabled={saving}
                                     className="flex-1 btn-secondary py-2"
                                 >
-                                    ⏱ Hourly
+                                    {languageMode === 'bilingual' ? '⏱ प्रति घंटा / Hourly' : '⏱ Hourly'}
                                 </button>
                             </div>
                         </div>
@@ -361,9 +360,7 @@ export default function SeekerOnboardingChat({ onProfileReady }) {
                                 placeholder={
                                     completed
                                         ? (languageMode === 'bilingual' ? 'नौकरियों, वेतन, सुझावों के बारे में पूछें… / Ask me about jobs...' : 'Ask me about jobs, salary, tips…')
-                                        : (languageMode === 'bilingual'
-                                            ? 'e.g. I am Rahul, Plumber, expecting 20000 in Delhi'
-                                            : (steps[currentIdx]?.placeholder || 'Type here…'))
+                                        : (steps[currentIdx]?.placeholder || 'Type here…')
                                 }
                                 className="flex-1 input-field py-2"
                                 autoFocus

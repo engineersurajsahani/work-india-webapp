@@ -19,16 +19,16 @@ const CONTENT = {
         onlineStatus: 'Online — responds instantly',
     },
     hi: {
-        welcome: "नमस्ते! 👋 **वर्कइंडिया स्मार्ट हेल्प AI** में आपका स्वागत है।\n\nमैं आपकी मदद कर सकता हूं:\n🏠 **घरेलू सेवाएं बुक करें** — प्लंबर, इलेक्ट्रीशियन, AC मरम्मत और अधिक\n📞 किसी भी पेशेवर के **संपर्क विवरण प्राप्त करें**\n💰 **सेवा मूल्य जांचें**\n💼 यदि आप एक कुशल पेशेवर हैं तो **नौकरी के अवसर खोजें**\n\nआप आज क्या करना चाहेंगे?",
+        welcome: "नमस्ते! 👋 **वर्कइंडिया स्मार्ट हेल्प AI** में आपका स्वागत है।\n\nनमस्ते! कृपया एक ही संदेश में अपना नाम, काम, अपेक्षित वेतन और शहर बताएं।\n\nHi! I'm your Smart Help AI 🤖\nPlease tell me your name, profession, expected salary, and city in ONE single message. (e.g. 'I am Amit, Plumber, expecting 25k in Mumbai')",
         quickPrompts: [
-            { label: '🔧 उपलब्ध प्लंबर', value: 'Show available plumbers near me' },
-            { label: '⚡ इलेक्ट्रीशियन सूची', value: 'List electricians near me' },
-            { label: '❄️ AC तकनीशियन', value: 'Show available AC technicians' },
-            { label: '💰 सेवा मूल्य', value: 'What are the prices for all services?' },
-            { label: '🧹 क्लीनर बुक करें', value: 'Book a home cleaner' },
-            { label: '💼 मुझे नौकरी चाहिए', value: 'I am looking for a job' },
+            { label: '🔧 उपलब्ध प्लंबर', value: 'मेरा नाम अमित है, मैं प्लंबर हूँ, मुंबई में 25k वेतन की तलाश है' },
+            { label: '⚡ इलेक्ट्रीशियन सूची', value: 'मैं राहुल हूँ, इलेक्ट्रीशियन हूँ, दिल्ली में 20k वेतन चाहिए' },
+            { label: '❄️ AC तकनीशियन', value: 'मैं AC तकनीशियन हूँ, पुणे में काम ढूंढ रहा हूँ' },
+            { label: '💰 सेवा मूल्य', value: 'सभी सेवाओं की दरें क्या हैं?' },
+            { label: '🧹 क्लीनर बुक करें', value: 'मुझे घर के लिए क्लीनर चाहिए' },
+            { label: '💼 मुझे नौकरी चाहिए', value: 'मैं नौकरी खोज रहा हूँ' },
         ],
-        placeholder: '"उपलब्ध प्लंबर दिखाएं" या "मुझे इलेक्ट्रीशियन की नौकरी चाहिए" आज़माएं...',
+        placeholder: 'e.g. मैं राहुल हूँ, इलेक्ट्रीशियन हूँ, दिल्ली में 20k वेतन चाहिए...',
         clearBtn: 'साफ़ करें',
         capabilities: ['सेवाएं बुक करें', 'नौकरियां खोजें', 'संपर्क प्राप्त करें'],
         assistantTitle: 'वर्कइंडिया स्मार्ट हेल्प AI',
@@ -43,10 +43,46 @@ const isHindiText = (text) => /[\u0900-\u097F]/.test(text)
  * formatBilingual: returns Hindi response first, English below.
  * Used when chatLanguageMode === 'bilingual'.
  */
-function formatBilingual(englishText) {
+function formatBilingual(englishText, profileSummary) {
+    if (profileSummary) {
+        return `✅ आपकी जानकारी मिल गई है!\n\n${profileSummary}\n\nमैं आपकी कैसे मदद कर सकता हूँ?\n\n---\n\n${englishText}`
+    }
     const SMART_HELP_HINDI =
         'मैं आपकी मदद के लिए यहां हूं। कृपया बताएं कि आप क्या चाहते हैं।'
     return `${SMART_HELP_HINDI}\n\n${englishText}`
+}
+
+function extractDetails(text) {
+    const textLower = text.toLowerCase()
+
+    let fullName = null
+    let title = null
+    let salary = null
+    let city = null
+
+    // Name match
+    const nameMatch = text.match(/(?:naam|name is|i am|mera naam|naam hai|my name is)\s+([A-Za-z\u0900-\u097F]+)/i)
+    if (nameMatch) fullName = nameMatch[1]
+
+    // Job match
+    const jobs = ['plumber', 'electrician', 'driver', 'carpenter', 'painter', 'ac', 'cleaner', 'नौकरी', 'प्लंबर', 'इलेक्ट्रीशियन']
+    for (const j of jobs) {
+        if (textLower.includes(j)) { title = j; break; }
+    }
+
+    // Salary match
+    const salMatch = text.match(/(\d+k|\d+,\d+|\d{4,})/i)
+    if (salMatch) salary = salMatch[0]
+
+    // City match
+    const cities = ['mumbai', 'pune', 'delhi', 'bangalore', 'मुंबई', 'पुणे', 'दिल्ली']
+    for (const c of cities) {
+        if (textLower.includes(c)) { city = c; break; }
+    }
+
+    if (!fullName && !title && !salary && !city) return null
+
+    return { fullName, title, salary, city }
 }
 
 // ─── Sub-components ────────────────────────────────────────────────────────────
@@ -157,11 +193,20 @@ export default function SmartHelp() {
         setTyping(true)
 
         setTimeout(() => {
+            let botResponse
             const englishResponse = "I'm here to help you. Please let me know what you need assistance with."
-            // In bilingual mode: Hindi first, then English below
-            const botResponse = languageMode === 'bilingual'
-                ? formatBilingual(englishResponse)
-                : englishResponse
+
+            if (languageMode === 'bilingual') {
+                const details = extractDetails(userText)
+                if (details) {
+                    const summary = `👤 नाम: ${details.fullName || 'User'}\n💼 पद: ${details.title || 'Professional'}\n💰 वेतन: ${details.salary || 'Market Rate'}\n📍 शहर: ${details.city || 'India'}`
+                    botResponse = formatBilingual(englishResponse, summary)
+                } else {
+                    botResponse = formatBilingual(englishResponse)
+                }
+            } else {
+                botResponse = englishResponse
+            }
 
             setMessages(prev => [
                 ...prev,
