@@ -278,7 +278,7 @@ export default function SmartHelp() {
                 <div className="flex-1">
                     <h2 className="font-bold text-gray-900">{content.assistantTitle}</h2>
                     <div className="flex items-center gap-1.5">
-                        <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                        <span className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
                         <span className="text-xs text-gray-500">{content.onlineStatus}</span>
                     </div>
                 </div>
@@ -349,8 +349,8 @@ export default function SmartHelp() {
                 <button
                     onClick={toggleListening}
                     className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 shadow-sm flex-shrink-0 ${listening
-                            ? 'bg-red-500 text-white animate-pulse shadow-red-200 ring-4 ring-red-100'
-                            : 'bg-gray-50 text-gray-500 hover:bg-gray-100'
+                        ? 'bg-red-500 text-white animate-pulse shadow-red-200 ring-4 ring-red-100'
+                        : 'bg-gray-50 text-gray-500 hover:bg-gray-100'
                         }`}
                     title={listening ? "Listening..." : "Voice Input"}
                 >
