@@ -7,30 +7,30 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['"Outfit"', 'sans-serif'],
       },
       colors: {
         primary: {
-          50: '#eff8ff',
-          100: '#dbeffe',
-          200: '#bfe3fd',
-          300: '#93d1fc',
-          400: '#61b6f9',
-          500: '#3b97f5',
-          600: '#2478ea',
-          700: '#1c63d8',
-          800: '#1d4faf',
-          900: '#1e3f8a',
+          50: '#f5f3ff', // Lightest purple
+          100: '#ede9fe',
+          200: '#ddd6fe',
+          300: '#c4b5fd',
+          400: '#a78bfa',
+          500: '#8b5cf6',
+          600: '#7c3aed', // Base purple (similar to left side of image)
+          700: '#6d28d9',
+          800: '#5b21b6',
+          900: '#4c1d95',
         },
         accent: {
-          400: '#93d1fc',
-          500: '#3b97f5',
-          600: '#2478ea',
+          400: '#60a5fa', // Blue (similar to right side of image)
+          500: '#3b82f6',
+          600: '#2563eb',
         },
       },
       backgroundImage: {
-        'hero-gradient': 'linear-gradient(135deg, #1c63d8 0%, #3b97f5 50%, #93d1fc 100%)',
-        'card-gradient': 'linear-gradient(135deg, #93d1fc 0%, #3b97f5 100%)',
+        'hero-gradient': 'linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%)', // Purple to Blue
+        'card-gradient': 'linear-gradient(135deg, #3b82f6 0%, #7c3aed 100%)', // Blue to Purple
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-out',

@@ -324,15 +324,14 @@ function MessageBubble({ msg, onSend }) {
                 </div>
             )}
             <div className={`w-full max-w-[85%] ${isBot ? 'order-2' : 'order-1'} flex flex-col gap-2`}>
-                <div className={`px-4 py-3 rounded-2xl text-sm leading-relaxed shadow-sm w-fit ${isBot || !isBot ? (isBot && isBot ? (isBot ? 'bg-white text-gray-800 rounded-bl-sm border border-gray-100' : '') : '') : ''} ${!isBot ? 'bg-gradient-to-br from-primary-600 to-accent-400 text-white rounded-br-sm ml-auto' : ''}`}>
+                <div className={`px-4 py-3 rounded-2xl text-sm leading-relaxed shadow-sm w-fit ${isBot ? 'bg-gray-200 text-gray-800 rounded-bl-sm border border-gray-300' : 'bg-gradient-to-br from-primary-600 to-accent-400 text-white rounded-br-sm ml-auto'}`}>
                     {isBot ? <RichText text={msg.text} /> : msg.text}
                 </div>
 
-                {/* Job Cards */}
                 {msg.jobs && (
                     <div className="flex flex-col gap-3 mt-1 w-full max-w-sm">
                         {msg.jobs.map(job => (
-                            <div key={job.id} className="bg-white border border-gray-200 rounded-xl p-3.5 shadow-sm flex flex-col gap-1.5 hover:border-primary-300 transition-colors">
+                            <div key={job.id} className="bg-gray-200 border border-gray-300 rounded-xl p-3.5 shadow-sm flex flex-col gap-1.5 hover:border-primary-300 transition-colors">
                                 <div className="flex justify-between items-start gap-2">
                                     <h4 className="font-bold text-gray-900 leading-tight">{job.title}</h4>
                                     <span className="text-xs bg-primary-100 text-primary-700 font-semibold px-2 py-0.5 rounded-full flex-shrink-0 whitespace-nowrap">{job.salary}</span>
@@ -382,7 +381,7 @@ function TypingIndicator() {
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-600 to-accent-400 flex items-center justify-center text-white text-sm font-bold flex-shrink-0 shadow-md self-end">
                 🤖
             </div>
-            <div className="bg-white border border-gray-100 rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm">
+            <div className="bg-gray-200 border border-gray-300 rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm">
                 <div className="flex gap-1 items-center h-4">
                     <span className="w-2 h-2 bg-primary-400 rounded-full animate-bounce [animation-delay:0ms]" />
                     <span className="w-2 h-2 bg-primary-400 rounded-full animate-bounce [animation-delay:150ms]" />
