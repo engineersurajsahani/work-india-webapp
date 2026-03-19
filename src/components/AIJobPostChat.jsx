@@ -6,7 +6,7 @@ function MessageBubble({ msg }) {
         <div className={`flex ${isBot ? 'justify-start' : 'justify-end'} animate-slide-up`}>
             <div
                 className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${isBot
-                    ? 'bg-white text-gray-800 border border-gray-100 rounded-bl-sm shadow-sm'
+                    ? 'bg-gray-200 text-gray-800 border border-gray-300 rounded-bl-sm shadow-sm'
                     : 'bg-gradient-to-br from-primary-600 to-accent-400 text-white rounded-br-sm shadow-md'
                     }`}
             >

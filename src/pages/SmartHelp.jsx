@@ -408,7 +408,7 @@ function MessageBubble({ msg, onSend }) {
         <div className={`flex flex-col ${isUser ? 'items-end' : 'items-start'} animate-fade-in gap-2`}>
             <div className={`max-w-[85%] lg:max-w-md px-4 py-3 rounded-2xl text-sm leading-relaxed ${isUser
                 ? 'bg-primary-600 text-white rounded-br-sm'
-                : 'bg-white text-gray-800 border border-gray-200 rounded-bl-sm shadow-sm'
+                : 'bg-gray-200 text-gray-800 border border-gray-300 rounded-bl-sm shadow-sm'
                 }`}>
                 <div
                     dangerouslySetInnerHTML={{
@@ -422,11 +422,10 @@ function MessageBubble({ msg, onSend }) {
                 </div>
             </div>
 
-            {/* Job Cards */}
             {isBot && msg.jobs && (
                 <div className="flex flex-col gap-3 mt-1 w-full max-w-xs lg:max-w-md">
                     {msg.jobs.map(job => (
-                        <div key={job.id} className="bg-white border border-gray-200 rounded-xl p-3.5 shadow-sm flex flex-col gap-1.5 hover:border-primary-300 transition-colors text-left">
+                        <div key={job.id} className="bg-gray-200 border border-gray-300 rounded-xl p-3.5 shadow-sm flex flex-col gap-1.5 hover:border-primary-300 transition-colors text-left">
                             <div className="flex justify-between items-start gap-2">
                                 <h4 className="font-bold text-gray-900 leading-tight">{job.title}</h4>
                                 <span className="text-xs bg-primary-100 text-primary-700 font-semibold px-2 py-0.5 rounded-full flex-shrink-0 whitespace-nowrap">{job.salary}</span>
@@ -465,7 +464,7 @@ function MessageBubble({ msg, onSend }) {
 function TypingIndicator() {
     return (
         <div className="flex justify-start animate-fade-in">
-            <div className="bg-white border border-gray-200 rounded-2xl rounded-bl-sm shadow-sm px-4 py-3">
+            <div className="bg-gray-200 border border-gray-300 rounded-2xl rounded-bl-sm shadow-sm px-4 py-3">
                 <div className="flex gap-1">
                     <span className="w-2 h-2 bg-primary-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                     <span className="w-2 h-2 bg-primary-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />

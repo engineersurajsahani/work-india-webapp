@@ -33,7 +33,7 @@ export default function DashboardHome() {
     if (role === 'provider') {
         return (
             <div className="space-y-6 animate-fade-in">
-                <div className="bg-gradient-to-r from-primary-600 to-accent-600 rounded-2xl p-6 text-white">
+                <div className="bg-evolve-gradient rounded-2xl p-6 text-white">
                     <h2 className="text-xl font-bold">Welcome back, {userName.split(' ')[0]}! 👋</h2>
                     <p className="text-primary-100 text-sm mt-1">You have 5 new booking requests waiting for your approval.</p>
                 </div>
