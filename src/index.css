@@ -20,11 +20,11 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-primary-600 hover:bg-primary-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
+    @apply bg-gradient-to-r from-primary-600 via-accent-purple to-accent-400 hover:opacity-90 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
   }
 
   .btn-secondary {
-    @apply border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200;
+    @apply border-2 border-accent-500 text-accent-600 hover:bg-accent-400/10 hover:text-accent-600 font-semibold px-6 py-3 rounded-xl transition-all duration-200;
   }
 
   .card {
@@ -32,7 +32,7 @@
   }
 
   .input-field {
-    @apply w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 bg-white;
+    @apply w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent-400 focus:border-transparent transition-all duration-200 bg-white;
   }
 
   .label {
@@ -44,12 +44,31 @@
   }
 
   .sidebar-item-active {
-    @apply flex items-center gap-3 px-4 py-3 rounded-xl bg-primary-600 text-white font-medium cursor-pointer shadow-md;
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-primary-600 to-accent-purple text-white font-medium cursor-pointer shadow-md;
   }
 }
 
 @layer utilities {
   .gradient-text {
-    @apply bg-gradient-to-r from-primary-700 to-primary-400 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary-600 via-accent-purple to-accent-400 bg-clip-text text-transparent;
   }
-}
+
+  .wavy-underline {
+    position: relative;
+    white-space: nowrap;
+    display: inline-block;
+  }
+
+  .wavy-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 100%;
+    height: 8px;
+    background-image: url("data:image/svg+xml,%3Csvg width='100%25' height='8' viewBox='0 0 100 8' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 4C12.5 4 12.5 1 25 1C37.5 1 37.5 7 50 7C62.5 7 62.5 1 75 1C87.5 1 87.5 4 100 4' stroke='%233b82f6' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    z-index: -1;
+  }
+}
