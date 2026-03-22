@@ -10,6 +10,7 @@ export default function RegisterPage() {
         role: 'jobseeker', // default role
     })
     const [errors, setErrors] = useState({})
+    const [loading, setLoading] = useState(false)
     const [submitted, setSubmitted] = useState(false)
     const [showChatbot, setShowChatbot] = useState(false)
     const [chatbotStep, setChatbotStep] = useState(0)
@@ -90,17 +91,40 @@ export default function RegisterPage() {
         if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }))
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault()
         const validationErrors = validate()
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors)
             setShowChatbot(false)
         } else {
-            // Save user data (simulated)
-            localStorage.setItem('userRole', form.role)
-            localStorage.setItem('userName', form.fullName)
-            setSubmitted(true)
+            setLoading(true)
+            try {
+                const response = await fetch('https://work-india-api.onrender.com/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: form.fullName,
+                        phone: form.phone,
+                        password: form.password
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    localStorage.setItem('userRole', form.role)
+                    localStorage.setItem('userName', data.name)
+                    localStorage.setItem('userToken', data.token)
+                    setSubmitted(true)
+                } else {
+                    setErrors({ submit: data.message || 'Registration failed' })
+                }
+            } catch (error) {
+                setErrors({ submit: 'Could not connect to server' })
+            } finally {
+                setLoading(false)
+            }
         }
     }
 
@@ -293,9 +317,17 @@ export default function RegisterPage() {
                                     <a href="#" className="text-primary-600 hover:underline">Privacy Policy</a>.
                                 </p>
 
-                                {/* Submit */}
-                                <button id="register-submit" type="submit" className="btn-primary w-full text-base py-3.5">
-                                    Create Account
+                                {errors.submit && <p className="text-red-500 text-sm text-center font-medium bg-red-50 py-2 rounded-xl border border-red-100">{errors.submit}</p>}
+                                <button id="register-submit" type="submit" disabled={loading} className="btn-primary w-full text-base py-3.5 flex items-center justify-center gap-2">
+                                    {loading ? (
+                                        <>
+                                            <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                                            </svg>
+                                            Creating Account...
+                                        </>
+                                    ) : 'Create Account'}
                                 </button>
                             </form>
                         </div>
