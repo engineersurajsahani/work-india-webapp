@@ -86,25 +86,25 @@ export default function DashboardLayout() {
 
     const currentPage = NAV_ITEMS.find(item => isActive(item))?.label || 'Dashboard'
 
-    // ── FULL-SCREEN CREATE ACCOUNT (before account is created) ──────────────
-    if (!accountCreated) {
-        return (
-            <div className="min-h-screen bg-[#f0f7ff] flex items-center justify-center p-4">
-                <div className="w-full max-w-2xl">
-                    <div className="text-center mb-6">
-                        <div className="inline-flex items-center gap-2 mb-2">
-                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-600 to-accent-400 flex items-center justify-center shadow-md">
-                                <span className="text-white font-bold text-sm">W</span>
-                            </div>
-                            <span className="text-2xl font-bold bg-gradient-to-r from-primary-700 to-primary-400 bg-clip-text text-transparent">WorkIndia</span>
-                        </div>
-                        <p className="text-gray-500 text-sm">Complete your account setup to get started</p>
-                    </div>
-                    <Outlet />
-                </div>
-            </div>
-        )
-    }
+    // ── REMOVED: FULL-SCREEN CREATE ACCOUNT (now shows sidebar by default) ──────────────
+    // if (!accountCreated) {
+    //     return (
+    //         <div className="min-h-screen bg-[#f0f7ff] flex items-center justify-center p-4">
+    //             <div className="w-full max-w-2xl">
+    //                 <div className="text-center mb-6">
+    //                     <div className="inline-flex items-center gap-2 mb-2">
+    //                         <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-600 to-accent-400 flex items-center justify-center shadow-md">
+    //                             <span className="text-white font-bold text-sm">W</span>
+    //                         </div>
+    //                         <span className="text-2xl font-bold bg-gradient-to-r from-primary-700 to-primary-400 bg-clip-text text-transparent">WorkIndia</span>
+    //                     </div>
+    //                     <p className="text-gray-500 text-sm">Complete your account setup to get started</p>
+    //                 </div>
+    //                 <Outlet />
+    //             </div>
+    //         </div>
+    //     )
+    // }
 
     return (
         <div className="flex h-screen bg-gray-50 overflow-hidden relative">

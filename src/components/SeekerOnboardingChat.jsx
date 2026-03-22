@@ -351,7 +351,7 @@ export default function SeekerOnboardingChat({ onProfileReady }) {
                 <div className="flex items-center gap-3">
                     <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center text-xl">🤖</div>
                     <div>
-                        <p className="font-bold text-base leading-tight">Create Your Account with AI Assistance</p>
+                        <p className="font-bold text-base leading-tight">Career Assistant</p>
                         <p className="text-primary-100 text-xs">
                             {modeState === 'COMPLETED' ? '✦ Profile complete · Ask me anything' : 'Account Setup'}
                         </p>

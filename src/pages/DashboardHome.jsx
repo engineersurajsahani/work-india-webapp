@@ -46,7 +46,7 @@ export default function DashboardHome() {
             {/* Welcome header */}
             <div>
                 <h2 className="text-2xl font-bold text-gray-900">
-                    {onboardingDone ? 'Create Your Account with AI Assistance' : `Welcome, ${userName.split(' ')[0]}! 👋`}
+                    {!onboardingDone ? 'Create Your Account with AI Assistance' : `Welcome back, ${userName.split(' ')[0]}! 👋`}
                 </h2>
                 <p className="text-gray-500 text-sm mt-1">
                     {onboardingDone
