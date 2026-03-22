@@ -6,7 +6,7 @@ function MessageBubble({ msg }) {
         <div className={`flex ${isBot ? 'justify-start' : 'justify-end'} animate-slide-up`}>
             <div
                 className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-line ${isBot
-                    ? 'bg-white text-gray-800 border border-gray-100 rounded-bl-sm shadow-sm'
+                    ? 'bg-gray-200 text-gray-800 border border-gray-300 rounded-bl-sm shadow-sm'
                     : 'bg-gradient-to-br from-primary-600 to-accent-400 text-white rounded-br-sm shadow-md'
                     }`}
             >
@@ -385,7 +385,7 @@ export default function SeekerOnboardingChat({ onProfileReady }) {
                         ))}
                         {isTyping && (
                             <div className="flex justify-start">
-                                <div className="bg-white border border-gray-100 rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm flex gap-1 items-center">
+                                <div className="bg-gray-200 border border-gray-300 rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm flex gap-1 items-center">
                                     <span className="w-2 h-2 bg-primary-400 rounded-full animate-bounce [animation-delay:0ms]" />
                                     <span className="w-2 h-2 bg-primary-400 rounded-full animate-bounce [animation-delay:150ms]" />
                                     <span className="w-2 h-2 bg-primary-400 rounded-full animate-bounce [animation-delay:300ms]" />

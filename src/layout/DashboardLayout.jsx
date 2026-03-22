@@ -93,7 +93,7 @@ export default function DashboardLayout() {
                 <div className="w-full max-w-2xl">
                     <div className="text-center mb-6">
                         <div className="inline-flex items-center gap-2 mb-2">
-                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-600 to-accent-400 flex items-center justify-center shadow-md">
+                            <div className="w-10 h-10 rounded-xl bg-evolve-gradient flex items-center justify-center shadow-md">
                                 <span className="text-white font-bold text-sm">W</span>
                             </div>
                             <span className="text-2xl font-bold bg-gradient-to-r from-primary-700 to-primary-400 bg-clip-text text-transparent">WorkIndia</span>
@@ -121,7 +121,7 @@ export default function DashboardLayout() {
                 {/* Logo */}
                 <div className="px-6 py-5 border-b border-gray-100">
                     <Link to="/" className="flex items-center gap-2">
-                        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-600 to-accent-400 flex items-center justify-center shadow-md">
+                        <div className="w-9 h-9 rounded-xl bg-evolve-gradient flex items-center justify-center shadow-md">
                             <span className="text-white font-bold text-sm">W</span>
                         </div>
                         <span className="text-xl font-bold gradient-text">WorkIndia</span>
@@ -148,7 +148,7 @@ export default function DashboardLayout() {
                 </nav>
 
                 {/* Upgrade Banner */}
-                <div className="m-3 p-4 rounded-xl bg-gradient-to-br from-primary-600 to-accent-400 text-white">
+                <div className="m-3 p-4 rounded-xl bg-evolve-gradient text-white">
                     <p className="text-sm font-semibold mb-1">Upgrade to Premium</p>
                     <p className="text-xs text-primary-100 mb-2">Get priority access and exclusive offers.</p>
 
@@ -204,50 +204,50 @@ export default function DashboardLayout() {
             {/* Main Content */}
             <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
                 {/* Top Navbar */}
-                <header className="bg-white border-b border-gray-100 px-4 sm:px-6 py-3.5 flex items-center justify-between shadow-sm z-10">
+                <header className="bg-evolve-gradient border-b border-primary-700/20 px-4 sm:px-6 py-3.5 flex items-center justify-between shadow-md z-10 text-white">
                     {/* Left: Hamburger + Breadcrumb */}
                     <div className="flex items-center gap-4">
                         <button
                             id="sidebar-toggle"
                             onClick={() => setSidebarOpen(!sidebarOpen)}
-                            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                            className="lg:hidden p-2 rounded-lg hover:bg-white/10 transition-colors text-white"
                             aria-label="Toggle sidebar"
                         >
-                            <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                             </svg>
                         </button>
                         <div>
-                            <p className="text-xs text-gray-400">WorkIndia</p>
-                            <h1 className="text-base font-semibold text-gray-900">{currentPage}</h1>
+                            <p className="text-xs text-primary-100">WorkIndia</p>
+                            <h1 className="text-base font-semibold text-white">{currentPage}</h1>
                         </div>
                     </div>
 
                     {/* Right: Search + Notif + Profile */}
                     <div className="flex items-center gap-3">
                         {/* Search */}
-                        <div className="hidden sm:flex items-center gap-2 bg-gray-100 rounded-xl px-3 py-2">
-                            <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className="hidden sm:flex items-center gap-2 bg-white/10 border border-white/20 rounded-xl px-3 py-2">
+                            <svg className="w-4 h-4 text-primary-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
                             </svg>
                             <input
                                 type="text"
                                 placeholder="Search here..."
-                                className="bg-transparent text-sm text-gray-600 placeholder-gray-400 outline-none w-36"
+                                className="bg-transparent text-sm text-white placeholder-primary-200 outline-none w-36"
                             />
                         </div>
 
                         {/* Notifications */}
-                        <div className="relative">
+                        <div className="relative text-gray-900">
                             <button
                                 id="notif-btn"
                                 onClick={() => setNotifOpen(!notifOpen)}
-                                className="relative p-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 transition-colors"
+                                className="relative p-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 transition-colors text-white"
                             >
-                                <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0 1 18 14.158V11a6.002 6.002 0 0 0-4-5.659V5a2 2 0 1 0-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 1 1-6 0v-1m6 0H9" />
                                 </svg>
-                                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full" />
+                                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-400 border-2 border-primary-600 rounded-full" />
                             </button>
                             {notifOpen && (
                                 <div className="absolute right-0 mt-2 w-80 bg-white rounded-2xl shadow-xl border border-gray-100 z-50 animate-fade-in">
@@ -274,13 +274,13 @@ export default function DashboardLayout() {
                         </div>
 
                         {/* Profile Avatar */}
-                        <Link to="/dashboard/profile" className="flex items-center gap-2 hover:bg-gray-100 rounded-xl p-1.5 pr-3 transition-colors">
-                            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-500 to-accent-400 flex items-center justify-center text-white font-bold text-sm shadow-md">
+                        <Link to="/dashboard/profile" className="flex items-center gap-2 hover:bg-white/10 rounded-xl p-1.5 pr-3 transition-colors border border-transparent hover:border-white/20">
+                            <div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center text-primary-600 font-bold text-sm shadow-md">
                                 {userName.charAt(0)}
                             </div>
-                            <div className="hidden sm:block text-left">
-                                <p className="text-sm font-semibold text-gray-900">{userName}</p>
-                                <p className="text-xs text-gray-400 capitalize">{role === 'provider' ? 'Job Provider' : 'Job Seeker'}</p>
+                            <div className="hidden sm:block text-left text-white">
+                                <p className="text-sm font-semibold">{userName}</p>
+                                <p className="text-xs text-primary-100 capitalize">{role === 'provider' ? 'Job Provider' : 'Job Seeker'}</p>
                             </div>
                         </Link>
                     </div>

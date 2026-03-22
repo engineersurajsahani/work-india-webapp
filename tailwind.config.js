@@ -7,30 +7,32 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['"Outfit"', 'sans-serif'],
       },
       colors: {
         primary: {
-          50: '#eff8ff',
-          100: '#dbeffe',
-          200: '#bfe3fd',
-          300: '#93d1fc',
-          400: '#61b6f9',
-          500: '#3b97f5',
-          600: '#2478ea',
-          700: '#1c63d8',
-          800: '#1d4faf',
-          900: '#1e3f8a',
+          50: '#f5f3ff',
+          100: '#ede9fe',
+          200: '#ddd6fe',
+          300: '#c4b5fd',
+          400: '#a78bfa',
+          500: '#8b5cf6',
+          600: '#4f46e5', // Indigo Primary
+          700: '#4338ca',
+          800: '#3730a3',
+          900: '#312e81',
         },
         accent: {
-          400: '#93d1fc',
-          500: '#3b97f5',
-          600: '#2478ea',
+          400: '#2dd4bf', // Teal
+          500: '#14b8a6',
+          600: '#0f766e',
+          purple: '#a855f7', // Purple accent
         },
       },
       backgroundImage: {
-        'hero-gradient': 'linear-gradient(135deg, #1c63d8 0%, #3b97f5 50%, #93d1fc 100%)',
-        'card-gradient': 'linear-gradient(135deg, #93d1fc 0%, #3b97f5 100%)',
+        'evolve-gradient': 'linear-gradient(135deg, #4f46e5 0%, #a855f7 50%, #2dd4bf 100%)',
+        'hero-gradient': 'linear-gradient(135deg, #4f46e5 0%, #a855f7 100%)',
+        'card-gradient': 'linear-gradient(135deg, #a855f7 0%, #2dd4bf 100%)',
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-out',
