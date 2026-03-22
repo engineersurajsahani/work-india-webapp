@@ -37,7 +37,7 @@ export default function LoginPage() {
         if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }))
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault()
         const validationErrors = validate()
         if (Object.keys(validationErrors).length > 0) {
@@ -46,17 +46,35 @@ export default function LoginPage() {
         }
         setLoading(true)
 
-        // Simulate login delay
-        setTimeout(() => {
-            setLoading(false)
-            // Save phone number or a mock name for UI purposes
-            localStorage.setItem('userName', 'User ' + form.phoneNumber.slice(-4))
-            localStorage.setItem('userPhone', form.phoneNumber)
-            if (!localStorage.getItem('userRole')) {
-                localStorage.setItem('userRole', 'jobseeker')
+        try {
+            const response = await fetch('http://localhost:5001/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    phone: form.phoneNumber,
+                    password: form.password
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // Save user data for UI purposes
+                localStorage.setItem('userName', data.name)
+                localStorage.setItem('userPhone', data.phone)
+                localStorage.setItem('userToken', data.token)
+                if (!localStorage.getItem('userRole')) {
+                    localStorage.setItem('userRole', 'jobseeker')
+                }
+                navigate('/dashboard')
+            } else {
+                setErrors({ submit: data.message || 'Login failed' })
             }
-            navigate('/dashboard')
-        }, 1200)
+        } catch (error) {
+            setErrors({ submit: 'Could not connect to server' })
+        } finally {
+            setLoading(false)
+        }
     }
 
     return (
@@ -135,6 +153,7 @@ export default function LoginPage() {
                             <label htmlFor="remember-me" className="text-sm text-gray-600">Remember me for 30 days</label>
                         </div>
 
+                        {errors.submit && <p className="text-red-500 text-sm text-center font-medium bg-red-50 py-2 rounded-xl border border-red-100">{errors.submit}</p>}
                         {/* Submit */}
                         <button
                             id="login-submit"
