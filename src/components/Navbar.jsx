@@ -11,37 +11,39 @@ export default function Navbar() {
     const navigate = useNavigate()
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100/50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-16">
-                    {/* Logo */}
-                    <Link to="/" className="flex items-center gap-2 group">
-                        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-600 to-accent-400 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-200">
-                            <span className="text-white font-bold text-sm">W</span>
-                        </div>
-                        <span className="text-xl font-bold gradient-text">GharSeva</span>
-                    </Link>
+                <div className="flex items-center justify-between h-20">
+                    {/* Logo & Links Group */}
+                    <div className="flex items-center gap-10">
+                        <Link to="/" className="flex items-center gap-2 group">
+                            <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-200">
+                                <span className="text-white font-bold text-sm">G</span>
+                            </div>
+                            <span className="text-xl font-bold text-gray-900 tracking-tight">GharSeva</span>
+                        </Link>
 
-                    {/* Desktop Nav */}
-                    <div className="hidden md:flex items-center gap-8">
-                        {NAV_LINKS.map(link => (
-                            <Link
-                                key={link.label}
-                                to={link.href}
-                                className="text-gray-600 hover:text-primary-600 font-medium transition-colors duration-200"
-                            >
-                                {link.label}
-                            </Link>
-                        ))}
+                        {/* Desktop Nav Links */}
+                        <div className="hidden md:flex items-center gap-8">
+                            {NAV_LINKS.map(link => (
+                                <Link
+                                    key={link.label}
+                                    to={link.href}
+                                    className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200"
+                                >
+                                    {link.label}
+                                </Link>
+                            ))}
+                        </div>
                     </div>
 
                     {/* Auth Buttons */}
-                    <div className="hidden md:flex items-center gap-3">
-                        <Link to="/login" className="btn-secondary py-2 px-5 text-sm">
-                            Login
+                    <div className="hidden md:flex items-center gap-6">
+                        <Link to="/login" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors">
+                            Sign in
                         </Link>
-                        <Link to="/register" className="btn-primary py-2 px-5 text-sm">
-                            Register
+                        <Link to="/register" className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-200 shadow-sm hover:shadow-md">
+                            Book a Service
                         </Link>
                     </div>
 

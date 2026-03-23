@@ -45,90 +45,74 @@ export default function LandingPage() {
             <Navbar />
 
             {/* Hero Section */}
-            <section className="relative pt-16 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-700 to-accent-600" />
-                <div className="absolute inset-0 opacity-10">
-                    <div className="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl" />
-                    <div className="absolute bottom-10 right-10 w-96 h-96 bg-accent-400 rounded-full blur-3xl" />
-                </div>
-
-                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 text-center">
-                    <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white text-sm font-medium px-4 py-2 rounded-full mb-6 animate-fade-in">
-                        <span className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
-                        India's #1 Home Services Platform — 50,000+ Bookings Completed
-                    </div>
-
-                    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight animate-slide-up">
-                        Trusted Home Services at Your<br />
-                        <span className="text-yellow-300">Doorstep</span> Across India
+            <section className="relative pt-20 pb-16 overflow-hidden bg-white">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+                    <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 tracking-tight leading-[1.1] max-w-4xl mx-auto animate-slide-up">
+                        Trusted <span className="relative inline-block">
+                            <span className="relative z-10 text-blue-600">home services</span>
+                            <svg className="absolute -bottom-2 left-0 w-full h-3 text-blue-200/60 z-0" viewBox="0 0 100 10" preserveAspectRatio="none">
+                                <path d="M0 5 Q 25 0, 50 5 T 100 5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+                            </svg>
+                        </span> at your doorstep.
                     </h1>
 
-                    <p className="mt-6 text-lg sm:text-xl text-primary-100 max-w-2xl mx-auto leading-relaxed animate-fade-in">
+                    <p className="mt-8 text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed animate-fade-in font-medium">
                         Whether you need a plumber, electrician, carpenter, or home cleaner, GharSeva connects your family with verified professionals — fast, safe, and affordable.
                     </p>
 
-                    <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
+                    <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center animate-slide-up">
                         <Link
                             id="hero-get-started"
                             to="/register"
-                            className="inline-flex items-center justify-center gap-2 bg-white text-primary-700 hover:bg-yellow-300 hover:text-primary-900 font-bold px-8 py-4 rounded-xl text-lg transition-all duration-200 shadow-xl hover:shadow-2xl hover:-translate-y-1"
+                            className="bg-gray-900 hover:bg-gray-800 text-white font-bold px-8 py-3.5 rounded-full text-sm transition-all duration-200 shadow-lg"
                         >
-                            Book a Service — It's Free
-                            <span>→</span>
+                            Book a Service
                         </Link>
                         <Link
                             to="/dashboard/jobs"
-                            className="inline-flex items-center justify-center gap-2 border-2 border-white/50 text-white hover:bg-white/10 font-semibold px-8 py-4 rounded-xl text-lg transition-all duration-200"
+                            className="flex items-center gap-2 text-sm font-bold text-gray-700 hover:text-gray-900 transition-colors px-6 py-3 border border-gray-200 rounded-full bg-white"
                         >
+                            <div className="w-5 h-5 rounded-full bg-blue-600 flex items-center justify-center text-[10px] text-white pl-0.5">▶</div>
                             Browse Services
                         </Link>
                     </div>
 
-                    {/* Stats */}
-                    <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
-                        {STATS.map(stat => (
-                            <div key={stat.label} className="text-center">
-                                <div className="text-2xl md:text-3xl font-extrabold text-white">{stat.value}</div>
-                                <div className="text-primary-200 text-sm mt-1">{stat.label}</div>
-                            </div>
-                        ))}
+                    {/* Logo Cloud */}
+                    <div className="mt-24">
+                        <p className="text-sm font-semibold text-gray-900 tracking-wide uppercase">Trusted by 50,000+ happy families across India</p>
+                        <div className="mt-10 flex flex-wrap justify-center items-center gap-x-12 gap-y-8 opacity-40 grayscale transition-all duration-500 hover:grayscale-0 hover:opacity-100">
+                            {[
+                                { name: 'Transistor', icon: '⧬' },
+                                { name: 'Tuple', icon: '■' },
+                                { name: 'StaticKit', icon: '⚡' },
+                                { name: 'Mirage', icon: '◎' },
+                                { name: 'Laravel', icon: '◇' },
+                                { name: 'Statamic', icon: '▣' },
+                            ].map(logo => (
+                                <div key={logo.name} className="flex items-center gap-2">
+                                    <span className="text-2xl font-bold">{logo.icon}</span>
+                                    <span className="text-xl font-bold tracking-tighter">{logo.name}</span>
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                </div>
-
-                {/* Wave Divider */}
-                <div className="relative h-16 overflow-hidden">
-                    <svg viewBox="0 0 1440 64" className="absolute bottom-0 w-full" preserveAspectRatio="none">
-                        <path d="M0,32L120,26.7C240,21,480,11,720,16C960,21,1200,43,1320,48L1440,53L1440,64L1320,64C1200,64,960,64,720,64C480,64,240,64,120,64L0,64Z" fill="#f0f7ff" />
-                    </svg>
                 </div>
             </section>
 
             {/* Features Section */}
-            <section id="features" className="py-20 bg-[#f0f7ff]">
+            <section id="features" className="py-24 bg-white border-t border-gray-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-14">
-                        <span className="text-primary-600 font-semibold text-sm uppercase tracking-wider">Why GharSeva?</span>
-                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Everything You Need at Home</h2>
-                        <p className="text-gray-500 mt-3 max-w-xl mx-auto">Reliable, affordable, and professional home services all in one trusted platform.</p>
+                    <div className="max-w-2xl text-left mb-16">
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">Professional home services at your command.</h2>
+                        <p className="text-lg text-gray-600 mt-4 leading-relaxed">GharSeva is built for busy families who want reliable, high-quality maintenance and cleaning services without the hassle.</p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                         {FEATURES.map(f => (
-                            <div
-                                key={f.id}
-                                id={`feature-${f.id}`}
-                                className="card group hover:-translate-y-2 transition-all duration-300 cursor-default"
-                            >
-                                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${f.color} flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                                    {f.icon}
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-3">{f.title}</h3>
-                                <p className="text-gray-500 leading-relaxed">{f.desc}</p>
-                                <div className="mt-5">
-                                    <Link to="/register" className="text-primary-600 font-semibold text-sm hover:text-primary-700 transition-colors inline-flex items-center gap-1">
-                                        Learn more <span>→</span>
-                                    </Link>
-                                </div>
+                            <div key={f.id} className="relative group">
+                                <div className="text-3xl mb-4 opacity-80 group-hover:scale-110 transition-transform duration-300">{f.icon}</div>
+                                <h3 className="text-lg font-bold text-gray-900 mb-3">{f.title}</h3>
+                                <p className="text-gray-600 text-sm leading-relaxed">{f.desc}</p>
                             </div>
                         ))}
                     </div>
@@ -136,54 +120,41 @@ export default function LandingPage() {
             </section>
 
             {/* How It Works */}
-            <section className="py-20 bg-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-14">
-                        <span className="text-primary-600 font-semibold text-sm uppercase tracking-wider">Simple Process</span>
-                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">How It Works</h2>
-                        <p className="text-gray-500 mt-3 max-w-xl mx-auto">Get your home service done in 3 simple steps — no hassle, no waiting.</p>
-                    </div>
+            <section className="py-24 bg-blue-600 overflow-hidden relative">
+                {/* Decorative background circle */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500 rounded-full blur-3xl opacity-20 pointer-events-none" />
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-10 relative">
-                        {/* Connector Line */}
-                        <div className="hidden md:block absolute top-10 left-1/4 right-1/4 h-0.5 bg-gradient-to-r from-primary-300 to-accent-400 z-0" />
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                    <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4">Complete your booking in seconds.</h2>
+                    <p className="text-blue-100 mb-16 max-w-xl mx-auto">Three simple steps to a better home.</p>
 
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {STEPS.map((s, i) => (
-                            <div key={s.step} className="relative text-center z-10">
-                                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary-600 to-accent-400 flex items-center justify-center mx-auto mb-6 shadow-xl">
-                                    <span className="text-2xl font-black text-white">{s.step}</span>
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-3">{s.title}</h3>
-                                <p className="text-gray-500 leading-relaxed">{s.desc}</p>
+                            <div key={s.step} className="bg-white/10 backdrop-blur-sm p-8 rounded-3xl border border-white/10 text-left hover:bg-white/20 transition-all duration-300">
+                                <div className="text-blue-200 font-bold mb-4 opacity-60">Step {s.step}</div>
+                                <h3 className="text-xl font-bold text-white mb-3">{s.title}</h3>
+                                <p className="text-blue-50 text-sm leading-relaxed">{s.desc}</p>
                             </div>
                         ))}
-                    </div>
-
-                    <div className="text-center mt-14">
-                        <Link to="/register" className="btn-primary text-base px-10 py-4 inline-flex items-center gap-2">
-                            Book Your First Service <span>🏠</span>
-                        </Link>
                     </div>
                 </div>
             </section>
 
             {/* CTA Banner */}
-            <section className="py-20 bg-gradient-to-r from-primary-600 to-accent-600">
-                <div className="max-w-4xl mx-auto px-4 text-center">
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4">
-                        Ready to Book a Home Service?
+            <section className="py-24 bg-white text-center">
+                <div className="max-w-4xl mx-auto px-4">
+                    <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight mb-4">
+                        Ready to book your service?
                     </h2>
-                    <p className="text-primary-100 text-lg mb-8">
-                        Join 2 million+ Indian families already trusting GharSeva for all their home needs.
+                    <p className="text-lg text-gray-600 mb-10 max-w-xl mx-auto">
+                        Join 2 million+ families already trusting GharSeva for all their home needs. Fast, safe, and professional.
                     </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Link to="/register" className="inline-block bg-white text-primary-700 font-bold px-8 py-4 rounded-xl hover:bg-yellow-300 hover:text-primary-900 transition-all duration-200 shadow-xl hover:-translate-y-1">
-                            Create Free Account
-                        </Link>
-                        <Link to="/dashboard/jobs" className="inline-block border-2 border-white text-white font-bold px-8 py-4 rounded-xl hover:bg-white/10 transition-all duration-200">
-                            Browse Services
-                        </Link>
-                    </div>
+                    <Link 
+                        to="/register" 
+                        className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold px-10 py-4 rounded-full transition-all duration-200 shadow-xl hover:shadow-2xl hover:-translate-y-1"
+                    >
+                        Book Your First Service
+                    </Link>
                 </div>
             </section>
 
