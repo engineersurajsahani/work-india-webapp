@@ -53,11 +53,11 @@
     @apply bg-gradient-to-r from-primary-700 to-primary-400 bg-clip-text text-transparent;
   }
 
-  /* Font Management Utilities */
-  .font-boosted .text-base { @apply text-lg; }
-  .font-boosted .text-sm { @apply text-base; }
-  .font-boosted .text-xs { @apply text-sm; }
-  .font-boosted .text-2xl { @apply text-3xl; }
-  .font-boosted .text-xl { @apply text-2xl; }
+  /* Font Management Utilities - Fixed circular dependency */
+  .font-boosted .text-base { font-size: 1.125rem; line-height: 1.75rem; }
+  .font-boosted .text-sm { font-size: 1rem; line-height: 1.5rem; }
+  .font-boosted .text-xs { font-size: 0.875rem; line-height: 1.25rem; }
+  .font-boosted .text-2xl { font-size: 1.875rem; line-height: 2.25rem; }
+  .font-boosted .text-xl { font-size: 1.5rem; line-height: 2rem; }
   .font-boosted h1, .font-boosted h2, .font-boosted h3 { @apply tracking-tight; }
 }
