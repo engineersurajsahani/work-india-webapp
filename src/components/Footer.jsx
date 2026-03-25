@@ -6,10 +6,10 @@ export default function Footer() {
                     {/* Brand */}
                     <div className="col-span-1 md:col-span-2">
                         <div className="flex items-center gap-2 mb-4">
-                            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-600 to-accent-500 flex items-center justify-center">
+                            <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg">
                                 <span className="text-white font-bold text-sm">W</span>
                             </div>
-                            <span className="text-xl font-bold text-white">GharSeva</span>
+                            <span className="text-xl font-bold text-white tracking-tight">WorkIndia</span>
                         </div>
                         <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
                             Connecting Indian households with trusted, verified service professionals. Your comfort is our priority.
@@ -51,8 +51,8 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="border-t border-gray-800 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-400">
-                    <p>© 2026 GharSeva. All rights reserved.</p>
+                <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+                    <p>© 2026 WorkIndia. All rights reserved.</p>
                     <p>Made with ❤️ for Indian households</p>
                 </div>
             </div>

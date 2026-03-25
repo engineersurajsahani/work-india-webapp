@@ -15,6 +15,7 @@ export default function DashboardLayout() {
         return phone ? localStorage.getItem(`accountCreated_${phone}`) === 'true' : false
     })
     const [premiumEnabled, setPremiumEnabled] = useState(false)
+    const [fontSizeBoost, setFontSizeBoost] = useState(() => localStorage.getItem('dashboardFontSizeBoost') === 'true')
 
     useEffect(() => {
         const storedRole = localStorage.getItem('userRole') || 'jobseeker'
@@ -120,11 +121,11 @@ export default function DashboardLayout() {
             <aside className={`fixed lg:static inset-y-0 left-0 z-30 w-64 bg-white border-r border-gray-100 flex flex-col shadow-sm transition-transform duration-300 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
                 {/* Logo */}
                 <div className="px-6 py-5 border-b border-gray-100">
-                    <Link to="/" className="flex items-center gap-2">
-                        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-600 to-accent-400 flex items-center justify-center shadow-md">
-                            <span className="text-white font-bold text-sm">W</span>
+                    <Link to="/" className="flex items-center gap-2 group">
+                        <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-200">
+                            <span className="text-white font-bold text-base">W</span>
                         </div>
-                        <span className="text-xl font-bold gradient-text">WorkIndia</span>
+                        <span className="text-xl font-bold text-gray-900 tracking-tight">WorkIndia</span>
                     </Link>
                 </div>
 
@@ -148,9 +149,11 @@ export default function DashboardLayout() {
                 </nav>
 
                 {/* Upgrade Banner */}
-                <div className="m-3 p-4 rounded-xl bg-gradient-to-br from-primary-600 to-accent-400 text-white">
-                    <p className="text-sm font-semibold mb-1">Upgrade to Premium</p>
-                    <p className="text-xs text-primary-100 mb-2">Get priority access and exclusive offers.</p>
+                <div className="m-3 p-5 rounded-2xl bg-blue-600 text-white shadow-lg">
+                    <p className="text-sm font-bold mb-1 flex items-center gap-2">
+                        <span>⭐</span> Premium Plan
+                    </p>
+                    <p className="text-xs text-blue-100 mb-3 leading-relaxed">Get priority access and exclusive service offers.</p>
 
                     {/* Bilingual Mode Label */}
                     <div className="flex items-center justify-between mb-3">
@@ -182,6 +185,23 @@ export default function DashboardLayout() {
                     >
                         {premiumEnabled ? '✓ Premium Enabled — Click to Disable' : '⭐ Upgrade Premium'}
                     </button>
+
+                    {/* Font Size Boost Toggle */}
+                    <div className="flex items-center justify-between mt-4 pt-4 border-t border-blue-400/30">
+                        <span className="text-xs text-blue-100 font-medium">Large Font Mode</span>
+                        <button
+                            onClick={() => {
+                                const newVal = !fontSizeBoost
+                                setFontSizeBoost(newVal)
+                                localStorage.setItem('dashboardFontSizeBoost', newVal.toString())
+                            }}
+                            className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors duration-200 outline-none ${fontSizeBoost ? 'bg-white' : 'bg-white/20'}`}
+                        >
+                            <span
+                                className={`inline-block h-3.5 w-3.5 transform rounded-full bg-blue-600 transition-transform duration-200 ${fontSizeBoost ? 'translate-x-5' : 'translate-x-1'}`}
+                            />
+                        </button>
+                    </div>
                 </div>
 
                 {/* Logout */}
@@ -219,7 +239,7 @@ export default function DashboardLayout() {
                         </button>
                         <div>
                             <p className="text-xs text-gray-400">WorkIndia</p>
-                            <h1 className="text-base font-semibold text-gray-900">{currentPage}</h1>
+                            <h1 className="text-base font-bold text-gray-900">{currentPage}</h1>
                         </div>
                     </div>
 
@@ -287,7 +307,7 @@ export default function DashboardLayout() {
                 </header>
 
                 {/* Page Content */}
-                <main className="flex-1 overflow-y-auto p-4 sm:p-6">
+                <main className={`flex-1 overflow-y-auto p-4 sm:p-6 transition-all duration-300 ${fontSizeBoost ? 'font-boosted' : ''}`}>
                     <Outlet />
                 </main>
             </div>

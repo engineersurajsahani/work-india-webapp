@@ -78,24 +78,24 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-accent-400/10 flex items-center justify-center p-4">
+        <div className="min-h-screen bg-white flex items-center justify-center p-4">
             {/* Background Blobs */}
             <div className="fixed inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary-200 rounded-full blur-3xl opacity-30" />
-                <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-accent-400 rounded-full blur-3xl opacity-20" />
+                <div className="absolute -top-24 -left-24 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-30" />
+                <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-20" />
             </div>
 
             <div className="relative w-full max-w-lg">
                 {/* Header */}
-                <div className="text-center mb-8">
-                    <Link to="/" className="inline-flex items-center gap-2 mb-6">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-600 to-accent-500 flex items-center justify-center shadow-md">
-                            <span className="text-white font-bold">W</span>
+                <div className="text-center mb-10">
+                    <Link to="/" className="inline-flex items-center gap-3 mb-8 group">
+                        <div className="w-11 h-11 rounded-xl bg-blue-600 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-200">
+                            <span className="text-white font-bold text-lg">W</span>
                         </div>
-                        <span className="text-2xl font-bold gradient-text">WorkIndia</span>
+                        <span className="text-3xl font-extrabold text-gray-900 tracking-tight">WorkIndia</span>
                     </Link>
-                    <h1 className="text-3xl font-bold text-gray-900">Sign in</h1>
-                    <p className="text-gray-500 mt-2">Enter your credentials to access your account</p>
+                    <h1 className="text-4xl font-black text-gray-900 tracking-tight">Welcome Back</h1>
+                    <p className="text-gray-500 mt-3 font-medium text-lg">Sign in to your WorkIndia account</p>
                 </div>
 
                 {/* Card */}

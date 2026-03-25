@@ -11,26 +11,26 @@ export default {
       },
       colors: {
         primary: {
-          50: '#f5f3ff', // Lightest purple
-          100: '#ede9fe',
-          200: '#ddd6fe',
-          300: '#c4b5fd',
-          400: '#a78bfa',
-          500: '#8b5cf6',
-          600: '#7c3aed', // Base purple (similar to left side of image)
-          700: '#6d28d9',
-          800: '#5b21b6',
-          900: '#4c1d95',
+          50: '#f0f7ff', // Very light blue
+          100: '#e0f2fe',
+          200: '#bae6fd',
+          300: '#7dd3fc',
+          400: '#38bdf8',
+          500: '#06b6d4',
+          600: '#2563eb', // Landing page blue
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
         },
         accent: {
-          400: '#60a5fa', // Blue (similar to right side of image)
+          400: '#60a5fa', 
           500: '#3b82f6',
           600: '#2563eb',
         },
       },
       backgroundImage: {
-        'hero-gradient': 'linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%)', // Purple to Blue
-        'card-gradient': 'linear-gradient(135deg, #3b82f6 0%, #7c3aed 100%)', // Blue to Purple
+        'hero-gradient': 'linear-gradient(135deg, #2563eb 0%, #1e3a8a 100%)', // Blue to Dark Blue
+        'card-gradient': 'linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%)', // Dark Blue to Blue
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-out',

@@ -125,14 +125,14 @@ export default function OverviewPage() {
     return (
         <div className="space-y-6 animate-fade-in">
             {/* Welcome Banner */}
-            <div className="bg-gradient-to-r from-primary-600 to-accent-600 rounded-2xl p-6 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="bg-blue-600 rounded-2xl p-8 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-xl">
                 <div>
-                    <h2 className="text-xl font-bold">Welcome back, {userName.split(' ')[0]}! 👋</h2>
-                    <p className="text-primary-100 text-sm mt-1">
+                    <h2 className="text-2xl font-black tracking-tight">Welcome back, {userName.split(' ')[0]}! 👋</h2>
+                    <p className="text-blue-100 text-lg mt-2 font-medium">
                         You have 3 new services available in your area. Book now!
                     </p>
                 </div>
-                <Link to="/dashboard/jobs" className="bg-white text-primary-700 hover:bg-yellow-300 hover:text-primary-900 font-semibold px-5 py-2.5 rounded-xl text-sm transition-all duration-200 shadow-lg whitespace-nowrap">
+                <Link to="/dashboard/jobs" className="bg-white text-blue-600 hover:bg-gray-100 font-bold px-8 py-3.5 rounded-2xl text-base transition-all duration-200 shadow-xl whitespace-nowrap">
                     View Services →
                 </Link>
             </div>

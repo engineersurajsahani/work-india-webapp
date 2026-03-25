@@ -130,14 +130,14 @@ export default function RegisterPage() {
 
     if (submitted) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-primary-50 to-accent-400/10 flex items-center justify-center p-4">
+            <div className="min-h-screen bg-white flex items-center justify-center p-4">
                 <div className="card max-w-md w-full text-center py-12">
-                    <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <span className="text-4xl">🎉</span>
+                    <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-8">
+                        <span className="text-5xl">🎉</span>
                     </div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-3">Account Created!</h2>
-                    <p className="text-gray-500 mb-6">Welcome to WorkIndia. Your profile is ready to go!</p>
-                    <Link to="/login" className="btn-primary w-full inline-block text-center">
+                    <h2 className="text-3xl font-black text-gray-900 mb-4 tracking-tight">Account Created!</h2>
+                    <p className="text-lg font-medium text-gray-500 mb-8 px-6">Welcome to WorkIndia. Your profile is ready to go!</p>
+                    <Link to="/login" className="btn-primary w-full inline-block text-center text-lg py-4">
                         Continue to Login
                     </Link>
                 </div>
@@ -146,36 +146,36 @@ export default function RegisterPage() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-accent-400/10 flex items-center justify-center p-4">
+        <div className="min-h-screen bg-white flex items-center justify-center p-4">
             {/* Background Blobs */}
             <div className="fixed inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary-200 rounded-full blur-3xl opacity-30" />
-                <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-accent-400 rounded-full blur-3xl opacity-20" />
+                <div className="absolute -top-24 -left-24 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-30" />
+                <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-20" />
             </div>
 
             <div className="relative w-full max-w-lg">
                 {/* Header */}
-                <div className="text-center mb-8">
-                    <Link to="/" className="inline-flex items-center gap-2 mb-6">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-600 to-accent-400 flex items-center justify-center shadow-md">
-                            <span className="text-white font-bold">W</span>
+                <div className="text-center mb-10">
+                    <Link to="/" className="inline-flex items-center gap-3 mb-8 group">
+                        <div className="w-11 h-11 rounded-xl bg-blue-600 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-200">
+                            <span className="text-white font-bold text-lg">W</span>
                         </div>
-                        <span className="text-2xl font-bold gradient-text">WorkIndia</span>
+                        <span className="text-3xl font-extrabold text-gray-900 tracking-tight">WorkIndia</span>
                     </Link>
-                    <h1 className="text-3xl font-bold text-gray-900">Create your account</h1>
-                    <p className="text-gray-500 mt-2">Join millions of Indians on WorkIndia</p>
+                    <h1 className="text-4xl font-black text-gray-900 tracking-tight">Join WorkIndia</h1>
+                    <p className="text-gray-500 mt-3 font-medium text-lg text-center px-4">Trusted home services at your doorstep.</p>
                 </div>
 
                 {/* Chatbot Toggle Button */}
-                <div className="flex justify-center mb-6">
+                <div className="flex justify-center mb-8">
                     <button
                         onClick={() => setShowChatbot(!showChatbot)}
-                        className={`flex items-center gap-2 px-6 py-2.5 rounded-full font-semibold transition-all shadow-md ${showChatbot
+                        className={`flex items-center gap-3 px-8 py-3 rounded-full font-bold transition-all shadow-md ${showChatbot
                             ? 'bg-gray-100 text-gray-600'
-                            : 'bg-gradient-to-r from-primary-600 to-accent-400 text-white hover:shadow-lg scale-105 active:scale-100'
+                            : 'bg-blue-600 text-white hover:bg-blue-700 hover:shadow-lg hover:-translate-y-0.5 active:scale-95'
                             }`}
                     >
-                        {showChatbot ? '❌ Close Chatbot' : '🤖 Fill with Chatbot'}
+                        {showChatbot ? '❌ Close Assistant' : '🤖 Use AI Assistant'}
                     </button>
                 </div>
 
